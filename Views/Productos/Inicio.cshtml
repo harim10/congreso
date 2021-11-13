@@ -1,0 +1,40 @@
+@model IEnumerable<Inventario.Models.Productos>
+@{
+    ViewData["Title"] = "Inicio de Productos";
+}
+<p>
+    <a asp-action="CrearProducto" class="btn btn-lg btn-success">Agregar Producto</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoria</th>
+            <th>Imagen</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Productos p in Model){
+            <tr>
+                <td>@p.Nombre</td>
+                <td>@p.Precio</td>
+                <td>@p.Stock</td>
+                <td>@p.Categoria.Nombre</td>
+                <td>
+                    <img src="@Url.Action("GetFoto", new { id = p.Id})" alt="Imagen" width="64" height="64">
+                </td>
+                <td>
+                    <a asp-action="ActualizarProducto" asp-route-id="@p.Id" class="btn btn-warning">Actualizar</a>
+                </td>
+                <td>
+                    <a asp-action="EliminarProducto" asp-route-id="@p.Id" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

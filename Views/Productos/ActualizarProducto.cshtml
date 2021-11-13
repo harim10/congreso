@@ -1,0 +1,63 @@
+@model Inventario.Models.Productos
+@{
+    ViewData["Title"] = "Actualizar Producto";
+}
+
+<h2 class="text-warning text-center">Actualizar Producto</h2>
+
+<form asp-action="ActualizarProducto" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label asp-for="Nombre">Nombre</label>
+            <input asp-for="Nombre" class="form-control" type="text">
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label asp-for="Precio">Precio</label>
+            <input asp-for="Precio" class="form-control" type="number">
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label asp-for="Stock">Stock</label>
+            <input asp-for="Stock" class="form-control" type="number">
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label asp-for="Id_Categoria">Categoría</label>
+            <!--/**/-->
+            @* <input asp-for="Id_Categoria" class="form-control" type="number"> *@
+            <select asp-for="Id_Categoria" class="form-control" 
+                asp-items="@ViewBag.Id_Categoria"></select>
+            <span asp-validation-for="Id_Categoria" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label >Imagen anterior</label>
+            <img src="@Url.Action("GetFoto", new { id = Model.Id})" alt="Imagen" width="64" height="64">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            <label asp-for="Imagen">Seleccione una imagen</label>
+            <input type="file" name="Imagen">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <input type="submit" value="Actualizar Producto" class="btn btn-warning">
+            <a asp-action="Inicio" class="btn btn-dark">Regresar</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
